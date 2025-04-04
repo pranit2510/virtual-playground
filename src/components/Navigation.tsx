@@ -1,68 +1,31 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
-import { motion, AnimatePresence } from 'framer-motion';
 import { Link } from 'react-router-dom';
+import { motion } from 'framer-motion';
 import { useTheme } from '../context/ThemeContext';
-
-const Navigation: React.FC = () => {
-  const [isOpen, setIsOpen] = useState(false);
-  const { theme, toggleTheme, currentTheme } = useTheme();
-
-  return (
-    <Nav theme={currentTheme}>
-      <Logo to="/" theme={currentTheme}>Virtual Playground</Logo>
-      <MenuButton onClick={() => setIsOpen(!isOpen)} theme={currentTheme}>
-        <span></span>
-        <span></span>
-        <span></span>
-      </MenuButton>
-      <AnimatePresence>
-        {isOpen && (
-          <MenuOverlay
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            theme={currentTheme}
-          >
-            <MenuLinks>
-              <MenuItem to="/" onClick={() => setIsOpen(false)} theme={currentTheme}>Home</MenuItem>
-              <MenuItem to="/about" onClick={() => setIsOpen(false)} theme={currentTheme}>About</MenuItem>
-              <MenuItem to="/projects" onClick={() => setIsOpen(false)} theme={currentTheme}>Projects</MenuItem>
-              <MenuItem to="/contact" onClick={() => setIsOpen(false)} theme={currentTheme}>Contact</MenuItem>
-              <MenuItem to="/3d" onClick={() => setIsOpen(false)} theme={currentTheme}>3D</MenuItem>
-            </MenuLinks>
-          </MenuOverlay>
-        )}
-      </AnimatePresence>
-      <ThemeToggle onClick={toggleTheme}>
-        {theme === 'light' ? '🌙' : '☀️'}
-      </ThemeToggle>
-    </Nav>
-  );
-};
 
 const Nav = styled.nav`
   position: fixed;
   top: 0;
   left: 0;
   right: 0;
-  padding: 1rem;
+  padding: ${({ theme }) => theme.spacing.md};
   display: flex;
   justify-content: space-between;
   align-items: center;
-  background: ${props => props.theme.background};
+  background-color: ${({ theme }) => theme.background};
   z-index: 1000;
 `;
 
 const Logo = styled(Link)`
-  font-size: 1.5rem;
+  font-size: ${({ theme }) => theme.typography.h3};
   font-weight: bold;
-  color: ${props => props.theme.text};
+  color: ${({ theme }) => theme.colors.primary};
   text-decoration: none;
 `;
 
 const MenuButton = styled.button`
-  display: flex;
+  display: none;
   flex-direction: column;
   justify-content: space-around;
   width: 2rem;
@@ -73,10 +36,14 @@ const MenuButton = styled.button`
   padding: 0;
   z-index: 10;
 
+  @media (max-width: ${({ theme }) => theme.breakpoints.md}) {
+    display: flex;
+  }
+
   span {
     width: 2rem;
     height: 0.25rem;
-    background: ${props => props.theme.text};
+    background: ${({ theme }) => theme.colors.primary};
     border-radius: 10px;
     transition: all 0.3s linear;
     position: relative;
@@ -84,42 +51,102 @@ const MenuButton = styled.button`
   }
 `;
 
-const MenuOverlay = styled(motion.div)`
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: ${props => props.theme.background};
-  display: flex;
-  justify-content: center;
-  align-items: center;
-`;
-
 const MenuLinks = styled.div`
   display: flex;
-  flex-direction: column;
   align-items: center;
+  gap: ${({ theme }) => theme.spacing.md};
+
+  @media (max-width: ${({ theme }) => theme.breakpoints.md}) {
+    display: none;
+  }
 `;
 
 const MenuItem = styled(Link)`
-  font-size: 2rem;
-  padding: 1rem;
-  color: ${props => props.theme.text};
+  color: ${({ theme }) => theme.text};
   text-decoration: none;
-  transition: color 0.3s ease-in-out;
+  font-size: ${({ theme }) => theme.typography.body};
+  transition: color 0.2s ease-in-out;
 
   &:hover {
-    color: ${props => props.theme.primary};
+    color: ${({ theme }) => theme.colors.primary};
+  }
+`;
+
+const MobileMenu = styled(motion.div)`
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: ${({ theme }) => theme.background};
+  padding: ${({ theme }) => theme.spacing.xl};
+  z-index: 5;
+
+  @media (max-width: ${({ theme }) => theme.breakpoints.md}) {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: ${({ theme }) => theme.spacing.lg};
   }
 `;
 
 const ThemeToggle = styled.button`
   background: none;
   border: none;
-  font-size: 1.5rem;
+  color: ${({ theme }) => theme.text};
+  font-size: ${({ theme }) => theme.typography.h3};
   cursor: pointer;
-  padding: 0.5rem;
+  padding: ${({ theme }) => theme.spacing.xs};
+  transition: color 0.2s ease-in-out;
+
+  &:hover {
+    color: ${({ theme }) => theme.colors.primary};
+  }
 `;
 
-export default Navigation;
+export const Navigation: React.FC = () => {
+  const [isOpen, setIsOpen] = useState(false);
+  const { theme, toggleTheme } = useTheme();
+
+  return (
+    <Nav>
+      <Logo to="/">Virtual Playground</Logo>
+      <MenuButton onClick={() => setIsOpen(!isOpen)}>
+        <span></span>
+        <span></span>
+        <span></span>
+      </MenuButton>
+      <MenuLinks>
+        <MenuItem to="/experiments">Experiments</MenuItem>
+        <MenuItem to="/about">About</MenuItem>
+        <MenuItem to="/contact">Contact</MenuItem>
+        <ThemeToggle onClick={toggleTheme}>
+          {theme === 'dark' ? '☀️' : '🌙'}
+        </ThemeToggle>
+      </MenuLinks>
+      {isOpen && (
+        <MobileMenu
+          initial={{ opacity: 0, y: -20 }}
+          animate={{ opacity: 1, y: 0 }}
+          exit={{ opacity: 0, y: -20 }}
+          transition={{ duration: 0.2 }}
+        >
+          <MenuItem to="/experiments" onClick={() => setIsOpen(false)}>
+            Experiments
+          </MenuItem>
+          <MenuItem to="/about" onClick={() => setIsOpen(false)}>
+            About
+          </MenuItem>
+          <MenuItem to="/contact" onClick={() => setIsOpen(false)}>
+            Contact
+          </MenuItem>
+          <ThemeToggle onClick={toggleTheme}>
+            {theme === 'dark' ? '☀️' : '🌙'}
+          </ThemeToggle>
+        </MobileMenu>
+      )}
+    </Nav>
+  );
+};
