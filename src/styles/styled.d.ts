@@ -18,5 +18,12 @@ declare module "styled-components" {
     typography: {
       small: string;
     };
+    spacing: {
+      xs: string;
+      sm: string;
+      md: string;
+      lg: string;
+      xl: string;
+    };
   }
 }

@@ -17,6 +17,13 @@ const lightTheme = {
   },
   typography: {
     small: '0.875rem'
+  },
+  spacing: {
+    xs: '0.25rem',
+    sm: '0.5rem',
+    md: '1rem',
+    lg: '2rem',
+    xl: '4rem'
   }
 };
 
@@ -36,6 +43,13 @@ const darkTheme = {
   },
   typography: {
     small: '0.875rem'
+  },
+  spacing: {
+    xs: '0.25rem',
+    sm: '0.5rem',
+    md: '1rem',
+    lg: '2rem',
+    xl: '4rem'
   }
 };
 
