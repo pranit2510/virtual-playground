@@ -19,7 +19,7 @@ export const GlobalStyles = createGlobalStyle`
     -moz-osx-font-smoothing: grayscale;
     background-color: ${({ theme }) => theme.background};
     color: ${({ theme }) => theme.text};
-    line-height: 1.5;
+    transition: background-color 0.2s ease, color 0.2s ease;
   }
 
   code {
@@ -28,42 +28,20 @@ export const GlobalStyles = createGlobalStyle`
   }
 
   a {
-    color: ${({ theme }) => theme.colors.primary};
     text-decoration: none;
-    transition: color 0.2s ease-in-out;
-
-    &:hover {
-      color: ${({ theme }) => theme.colors.secondary};
-    }
+    color: inherit;
   }
 
   button {
-    cursor: pointer;
     border: none;
-    outline: none;
     background: none;
-    font-family: inherit;
+    cursor: pointer;
+    font: inherit;
+    color: inherit;
   }
 
-  h1, h2, h3, h4, h5, h6 {
-    margin-bottom: ${({ theme }) => theme.spacing.md};
-    font-weight: 600;
-  }
-
-  h1 {
-    font-size: ${({ theme }) => theme.typography.h1};
-  }
-
-  h2 {
-    font-size: ${({ theme }) => theme.typography.h2};
-  }
-
-  h3 {
-    font-size: ${({ theme }) => theme.typography.h3};
-  }
-
-  p {
-    margin-bottom: ${({ theme }) => theme.spacing.md};
+  ul, ol {
+    list-style: none;
   }
 
   img {
@@ -71,8 +49,20 @@ export const GlobalStyles = createGlobalStyle`
     height: auto;
   }
 
-  ::selection {
-    background-color: ${({ theme }) => `${theme.colors.primary}33`};
-    color: ${({ theme }) => theme.text};
+  ::-webkit-scrollbar {
+    width: 8px;
+  }
+
+  ::-webkit-scrollbar-track {
+    background: ${({ theme }) => `${theme.colors.primary}11`};
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background: ${({ theme }) => theme.colors.primary};
+    border-radius: 4px;
+  }
+
+  ::-webkit-scrollbar-thumb:hover {
+    background: ${({ theme }) => theme.colors.accent};
   }
 `;
