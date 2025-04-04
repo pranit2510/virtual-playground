@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 export const theme = {
   colors: {
     primary: {
@@ -45,6 +46,38 @@ export const theme = {
       '4xl': '2.25rem',
       '5xl': '3rem',
     },
+=======
+import { DefaultTheme } from 'styled-components';
+
+export const lightTheme: DefaultTheme = {
+  colors: {
+    primary: '#6200ee',
+    primaryDark: '#3700b3',
+    secondary: '#03dac6',
+    background: '#ffffff',
+    cardBackground: '#f5f5f5',
+    surface: '#ffffff',
+    text: '#000000',
+    textSecondary: '#666666',
+    border: '#e0e0e0',
+    error: '#b00020',
+    success: '#00c853',
+    warning: '#ffd600',
+    disabled: '#cccccc',
+  },
+  shadows: {
+    small: '0 2px 4px rgba(0, 0, 0, 0.1)',
+    medium: '0 4px 6px rgba(0, 0, 0, 0.1)',
+    large: '0 8px 16px rgba(0, 0, 0, 0.1)',
+  },
+  typography: {
+    h1: '2.5rem',
+    h2: '2rem',
+    h3: '1.75rem',
+    h4: '1.5rem',
+    body: '1rem',
+    small: '0.875rem',
+>>>>>>> cd3820c6bbcd30e87455e24fb02a9ebda90e358a
   },
   spacing: {
     xs: '0.25rem',
@@ -52,6 +85,7 @@ export const theme = {
     md: '1rem',
     lg: '1.5rem',
     xl: '2rem',
+<<<<<<< HEAD
     '2xl': '3rem',
     '3xl': '4rem',
   },
@@ -83,3 +117,69 @@ export const theme = {
 };
 
 export type Theme = typeof theme; 
+=======
+  },
+  breakpoints: {
+    xs: '320px',
+    sm: '576px',
+    md: '768px',
+    lg: '992px',
+    xl: '1200px',
+  },
+  transitions: {
+    fast: '0.2s ease',
+    medium: '0.3s ease',
+    slow: '0.5s ease',
+  },
+};
+
+export const darkTheme: DefaultTheme = {
+  colors: {
+    primary: '#bb86fc',
+    primaryDark: '#3700b3',
+    secondary: '#03dac6',
+    background: '#121212',
+    cardBackground: '#1e1e1e',
+    surface: '#1e1e1e',
+    text: '#ffffff',
+    textSecondary: '#b3b3b3',
+    border: '#333333',
+    error: '#cf6679',
+    success: '#00c853',
+    warning: '#ffd600',
+    disabled: '#666666',
+  },
+  shadows: {
+    small: '0 2px 4px rgba(0, 0, 0, 0.2)',
+    medium: '0 4px 6px rgba(0, 0, 0, 0.2)',
+    large: '0 8px 16px rgba(0, 0, 0, 0.2)',
+  },
+  typography: {
+    h1: '2.5rem',
+    h2: '2rem',
+    h3: '1.75rem',
+    h4: '1.5rem',
+    body: '1rem',
+    small: '0.875rem',
+  },
+  spacing: {
+    xs: '0.25rem',
+    sm: '0.5rem',
+    md: '1rem',
+    lg: '1.5rem',
+    xl: '2rem',
+  },
+  breakpoints: {
+    xs: '320px',
+    sm: '576px',
+    md: '768px',
+    lg: '992px',
+    xl: '1200px',
+  },
+  transitions: {
+    fast: '0.2s ease',
+    medium: '0.3s ease',
+    slow: '0.5s ease',
+  },
+}; 
+>>>>>>> cd3820c6bbcd30e87455e24fb02a9ebda90e358a
