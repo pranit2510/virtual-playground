@@ -17,6 +17,7 @@ declare module "styled-components" {
       text: string;
       background: string;
       accent: string;
+      error: string;
     };
     breakpoints: {
       sm: string;
@@ -29,6 +30,7 @@ declare module "styled-components" {
       h2: string;
       h3: string;
       body: string;
+      small: string;
     };
   }
 }

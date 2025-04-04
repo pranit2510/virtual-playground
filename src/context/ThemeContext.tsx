@@ -17,6 +17,7 @@ const lightTheme = {
     text: '#333333',
     background: '#ffffff',
     accent: '#ff4081',
+    error: '#b00020',
   },
   breakpoints: {
     sm: '640px',
@@ -29,6 +30,7 @@ const lightTheme = {
     h2: '2rem',
     h3: '1.5rem',
     body: '1rem',
+    small: '0.875rem',
   },
 };
 
@@ -48,6 +50,7 @@ const darkTheme = {
     text: '#ffffff',
     background: '#121212',
     accent: '#cf6679',
+    error: '#cf6679',
   },
   breakpoints: {
     sm: '640px',
@@ -60,6 +63,7 @@ const darkTheme = {
     h2: '2rem',
     h3: '1.5rem',
     body: '1rem',
+    small: '0.875rem',
   },
 };
 
