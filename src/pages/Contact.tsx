@@ -9,51 +9,58 @@ interface FormValues {
   message: string;
 }
 
-const ContactContainer = styled.div`
+const Container = styled.div`
   min-height: 100vh;
-  padding: 80px ${({ theme }) => theme.spacing.xl};
-  background-color: ${({ theme }) => theme.colors.background};
+  padding: ${({ theme }) => theme.spacing.xl};
+  padding-top: calc(${({ theme }) => theme.spacing.xl} * 3);
+  background-color: ${({ theme }) => theme.background};
+  color: ${({ theme }) => theme.text};
 `;
 
-const Section = styled.section`
-  max-width: 1200px;
+const Content = styled.div`
+  max-width: 800px;
   margin: 0 auto;
-  padding: ${({ theme }) => theme.spacing.xl} 0;
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: ${({ theme }) => theme.spacing.xl};
-
-  @media (max-width: ${({ theme }) => theme.breakpoints.md}) {
-    grid-template-columns: 1fr;
-  }
 `;
 
-const Title = styled(motion.h1)`
+const Title = styled.h1`
   font-size: ${({ theme }) => theme.typography.h1};
-  color: ${({ theme }) => theme.colors.text};
-  grid-column: 1 / -1;
+  color: ${({ theme }) => theme.colors.primary};
+  margin-bottom: ${({ theme }) => theme.spacing.lg};
   text-align: center;
-  margin-bottom: ${({ theme }) => theme.spacing.xl};
 `;
 
 const ContactInfo = styled(motion.div)`
   padding: ${({ theme }) => theme.spacing.xl};
-  background-color: ${({ theme }) => theme.colors.surface};
+  background-color: ${({ theme }) => `${theme.colors.primary}11`};
   border-radius: 12px;
-  box-shadow: ${({ theme }) => theme.shadows.medium};
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 `;
 
-const InfoTitle = styled.h3`
-  font-size: ${({ theme }) => theme.typography.h3};
-  color: ${({ theme }) => theme.colors.text};
-  margin-bottom: ${({ theme }) => theme.spacing.lg};
+const Section = styled.div`
+  margin-bottom: ${({ theme }) => theme.spacing.xl};
 `;
 
-const InfoText = styled.p`
-  font-size: ${({ theme }) => theme.typography.body};
-  color: ${({ theme }) => theme.colors.textSecondary};
+const SectionTitle = styled.h2`
+  font-size: ${({ theme }) => theme.typography.h2};
+  color: ${({ theme }) => theme.colors.primary};
   margin-bottom: ${({ theme }) => theme.spacing.md};
+`;
+
+const Text = styled.p`
+  font-size: ${({ theme }) => theme.typography.body};
   line-height: 1.6;
+  margin-bottom: ${({ theme }) => theme.spacing.md};
+`;
+
+const ContactLink = styled.a`
+  color: ${({ theme }) => theme.colors.primary};
+  text-decoration: none;
+  font-weight: bold;
+  transition: color 0.2s ease;
+
+  &:hover {
+    color: ${({ theme }) => theme.colors.accent};
+  }
 `;
 
 const ContactForm = styled(motion.form)`
@@ -155,92 +162,61 @@ const Contact: React.FC = () => {
   });
 
   return (
-    <ContactContainer>
-      <Section>
-        <Title
+    <Container>
+      <Content>
+        <Title>Contact Us</Title>
+        <ContactInfo
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6 }}
+          transition={{ duration: 0.5 }}
         >
-          Get in Touch
-        </Title>
-
-        <ContactInfo
-          initial={{ opacity: 0, x: -20 }}
-          animate={{ opacity: 1, x: 0 }}
-          transition={{ duration: 0.6, delay: 0.2 }}
-        >
-          <InfoTitle>Contact Information</InfoTitle>
-          <InfoText>
-            Have questions about Virtual Playground? Want to collaborate on a project?
-            We'd love to hear from you! Fill out the form and we'll get back to you
-            as soon as possible.
-          </InfoText>
-          <InfoText>
-            Email: info@virtualplayground.com
-            <br />
-            Phone: +1 (555) 123-4567
-            <br />
-            Address: 123 Digital Street, Tech City, TC 12345
-          </InfoText>
+          <Section>
+            <SectionTitle>Get in Touch</SectionTitle>
+            <Text>
+              We'd love to hear from you! Whether you have questions about our
+              experiments, want to collaborate on a project, or just want to say
+              hello, feel free to reach out.
+            </Text>
+          </Section>
+          <Section>
+            <SectionTitle>Contact Information</SectionTitle>
+            <Text>
+              Email:{' '}
+              <ContactLink href="mailto:contact@virtualplayground.com">
+                contact@virtualplayground.com
+              </ContactLink>
+            </Text>
+            <Text>
+              GitHub:{' '}
+              <ContactLink
+                href="https://github.com/pranit2510/virtual-playground"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                github.com/pranit2510/virtual-playground
+              </ContactLink>
+            </Text>
+          </Section>
+          <Section>
+            <SectionTitle>Social Media</SectionTitle>
+            <Text>
+              Follow us on social media to stay updated with our latest experiments
+              and announcements.
+            </Text>
+            <Text>
+              Twitter:{' '}
+              <ContactLink
+                href="https://twitter.com/virtualplayground"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                @virtualplayground
+              </ContactLink>
+            </Text>
+          </Section>
         </ContactInfo>
-
-        <ContactForm
-          onSubmit={handleSubmit}
-          initial={{ opacity: 0, x: 20 }}
-          animate={{ opacity: 1, x: 0 }}
-          transition={{ duration: 0.6, delay: 0.2 }}
-        >
-          <FormGroup>
-            <Label htmlFor="name">Name</Label>
-            <Input
-              id="name"
-              name="name"
-              value={values.name}
-              onChange={handleChange}
-              onBlur={handleBlur}
-            />
-            {touched.name && errors.name && <ErrorMessage>{errors.name}</ErrorMessage>}
-          </FormGroup>
-
-          <FormGroup>
-            <Label htmlFor="email">Email</Label>
-            <Input
-              id="email"
-              name="email"
-              type="email"
-              value={values.email}
-              onChange={handleChange}
-              onBlur={handleBlur}
-            />
-            {touched.email && errors.email && <ErrorMessage>{errors.email}</ErrorMessage>}
-          </FormGroup>
-
-          <FormGroup>
-            <Label htmlFor="message">Message</Label>
-            <TextArea
-              id="message"
-              name="message"
-              value={values.message}
-              onChange={handleChange}
-              onBlur={handleBlur}
-            />
-            {touched.message && errors.message && (
-              <ErrorMessage>{errors.message}</ErrorMessage>
-            )}
-          </FormGroup>
-
-          <SubmitButton
-            type="submit"
-            disabled={isSubmitting}
-            whileHover={{ scale: 1.02 }}
-            whileTap={{ scale: 0.98 }}
-          >
-            {isSubmitting ? 'Sending...' : 'Send Message'}
-          </SubmitButton>
-        </ContactForm>
-      </Section>
-    </ContactContainer>
+      </Content>
+    </Container>
   );
 };
 
