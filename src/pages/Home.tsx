@@ -19,7 +19,7 @@ const Content = styled.div`
 
 const Title = styled(motion.h1)`
   font-size: ${({ theme }) => theme.typography.h1};
-  color: ${({ theme }) => theme.colors.primary};
+  color: ${({ theme }) => theme.colors.text};
   margin-bottom: ${({ theme }) => theme.spacing.lg};
 `;
 

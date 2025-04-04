@@ -17,7 +17,7 @@ const Content = styled.div`
 
 const Title = styled.h1`
   font-size: ${({ theme }) => theme.typography.h1};
-  color: ${({ theme }) => theme.colors.primary};
+  color: ${({ theme }) => theme.colors.text};
   margin-bottom: ${({ theme }) => theme.spacing.lg};
   text-align: center;
 `;
@@ -52,6 +52,7 @@ const Description = styled.p`
   font-size: ${({ theme }) => theme.typography.body};
   line-height: 1.6;
   margin-bottom: ${({ theme }) => theme.spacing.md};
+  color: ${({ theme }) => theme.colors.text};
 `;
 
 const Tag = styled.span`
@@ -83,6 +84,10 @@ const Input = styled.input`
   &::placeholder {
     color: ${({ theme }) => `${theme.text}88`};
   }
+`;
+
+const CardDescription = styled.p`
+  color: ${({ theme }) => `${theme.colors.text}88`};
 `;
 
 const experiments = [

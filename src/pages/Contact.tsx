@@ -24,7 +24,7 @@ const Content = styled.div`
 
 const Title = styled.h1`
   font-size: ${({ theme }) => theme.typography.h1};
-  color: ${({ theme }) => theme.colors.primary};
+  color: ${({ theme }) => theme.colors.text};
   margin-bottom: ${({ theme }) => theme.spacing.lg};
   text-align: center;
 `;
@@ -74,21 +74,21 @@ const FormGroup = styled.div`
   margin-bottom: ${({ theme }) => theme.spacing.lg};
 `;
 
-const Label = styled.label`
+const FormLabel = styled.label`
   display: block;
   font-size: ${({ theme }) => theme.typography.body};
-  color: ${({ theme }) => theme.text};
+  color: ${({ theme }) => theme.colors.text};
   margin-bottom: ${({ theme }) => theme.spacing.xs};
 `;
 
-const Input = styled.input`
+const FormInput = styled.input`
   width: 100%;
   padding: ${({ theme }) => theme.spacing.md};
   background-color: ${({ theme }) => `${theme.colors.primary}11`};
   border: 1px solid ${({ theme }) => theme.colors.primary};
   border-radius: 8px;
   font-size: ${({ theme }) => theme.typography.body};
-  color: ${({ theme }) => theme.text};
+  color: ${({ theme }) => theme.colors.text};
 
   &:focus {
     outline: none;
@@ -96,18 +96,18 @@ const Input = styled.input`
   }
 
   &::placeholder {
-    color: ${({ theme }) => `${theme.text}88`};
+    color: ${({ theme }) => `${theme.colors.text}88`};
   }
 `;
 
-const TextArea = styled.textarea`
+const FormTextarea = styled.textarea`
   width: 100%;
   padding: ${({ theme }) => theme.spacing.md};
   background-color: ${({ theme }) => `${theme.colors.primary}11`};
   border: 1px solid ${({ theme }) => theme.colors.primary};
   border-radius: 8px;
   font-size: ${({ theme }) => theme.typography.body};
-  color: ${({ theme }) => theme.text};
+  color: ${({ theme }) => theme.colors.text};
   min-height: 150px;
   resize: vertical;
 
@@ -117,13 +117,13 @@ const TextArea = styled.textarea`
   }
 
   &::placeholder {
-    color: ${({ theme }) => `${theme.text}88`};
+    color: ${({ theme }) => `${theme.colors.text}88`};
   }
 `;
 
-const Button = styled(motion.button)`
+const SubmitButton = styled.button`
   background-color: ${({ theme }) => theme.colors.primary};
-  color: #ffffff;
+  color: ${({ theme }) => `${theme.colors.text}88`};
   border: none;
   border-radius: 8px;
   padding: ${({ theme }) => `${theme.spacing.md} ${theme.spacing.lg}`};
@@ -142,9 +142,13 @@ const Button = styled(motion.button)`
   }
 `;
 
-const ErrorMessage = styled.span`
-  color: ${({ theme }) => theme.colors.error};
+const ErrorMessage = styled.p`
+  color: ${({ theme }) => `${theme.colors.text}88`};
   font-size: ${({ theme }) => theme.typography.small};
+`;
+
+const SuccessMessage = styled.p`
+  color: ${({ theme }) => theme.colors.text};
 `;
 
 const Contact: React.FC = () => {
@@ -231,8 +235,8 @@ const Contact: React.FC = () => {
         >
           <form onSubmit={handleSubmit}>
             <FormGroup>
-              <Label htmlFor="name">Name</Label>
-              <Input
+              <FormLabel htmlFor="name">Name</FormLabel>
+              <FormInput
                 type="text"
                 id="name"
                 name="name"
@@ -244,8 +248,8 @@ const Contact: React.FC = () => {
               />
             </FormGroup>
             <FormGroup>
-              <Label htmlFor="email">Email</Label>
-              <Input
+              <FormLabel htmlFor="email">Email</FormLabel>
+              <FormInput
                 type="email"
                 id="email"
                 name="email"
@@ -257,8 +261,8 @@ const Contact: React.FC = () => {
               />
             </FormGroup>
             <FormGroup>
-              <Label htmlFor="message">Message</Label>
-              <TextArea
+              <FormLabel htmlFor="message">Message</FormLabel>
+              <FormTextarea
                 id="message"
                 name="message"
                 value={values.message}
@@ -268,13 +272,13 @@ const Contact: React.FC = () => {
                 required
               />
             </FormGroup>
-            <Button
+            <SubmitButton
               type="submit"
               whileHover={{ scale: 1.02 }}
               whileTap={{ scale: 0.98 }}
             >
               Send Message
-            </Button>
+            </SubmitButton>
           </form>
         </FormContainer>
       </Content>

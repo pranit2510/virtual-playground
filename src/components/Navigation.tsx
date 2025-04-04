@@ -62,7 +62,7 @@ const MenuLinks = styled.div`
 `;
 
 const MenuItem = styled(Link)`
-  color: ${({ theme }) => theme.text};
+  color: ${({ theme }) => theme.colors.text};
   text-decoration: none;
   font-size: ${({ theme }) => theme.typography.body};
   transition: color 0.2s ease-in-out;
@@ -95,7 +95,7 @@ const MobileMenu = styled(motion.div)`
 const ThemeToggle = styled.button`
   background: none;
   border: none;
-  color: ${({ theme }) => theme.text};
+  color: ${({ theme }) => theme.colors.text};
   font-size: ${({ theme }) => theme.typography.h3};
   cursor: pointer;
   padding: ${({ theme }) => theme.spacing.xs};
