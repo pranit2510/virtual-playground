@@ -16,6 +16,10 @@ declare module "styled-components" {
       border: string;
     };
     typography: {
+      h1: string;
+      h2: string;
+      h3: string;
+      body: string;
       small: string;
     };
     spacing: {

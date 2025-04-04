@@ -16,6 +16,10 @@ const lightTheme = {
     border: '#e0e0e0'
   },
   typography: {
+    h1: '2.5rem',
+    h2: '2rem',
+    h3: '1.5rem',
+    body: '1rem',
     small: '0.875rem'
   },
   spacing: {
@@ -42,6 +46,10 @@ const darkTheme = {
     border: '#2c2c2e'
   },
   typography: {
+    h1: '2.5rem',
+    h2: '2rem',
+    h3: '1.5rem',
+    body: '1rem',
     small: '0.875rem'
   },
   spacing: {
