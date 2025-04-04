@@ -29,5 +29,10 @@ declare module "styled-components" {
       lg: string;
       xl: string;
     };
+    breakpoints: {
+      mobile: string;
+      tablet: string;
+      desktop: string;
+    };
   }
 }

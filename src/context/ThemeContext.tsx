@@ -1,19 +1,19 @@
 import React, { createContext, useContext, useState } from 'react';
 import { ThemeProvider as StyledThemeProvider } from 'styled-components';
 
-const lightTheme = {
+export const lightTheme = {
   colors: {
-    background: '#ffffff',
-    text: '#000000',
+    background: '#FFFFFF',
+    text: '#333333',
     textSecondary: '#666666',
     primary: '#007AFF',
-    primaryDark: '#0056b3',
+    primaryDark: '#0056B3',
     secondary: '#5856D6',
     accent: '#FF2D55',
-    error: '#b00020',
-    surface: '#f5f5f5',
-    cardBackground: '#ffffff',
-    border: '#e0e0e0'
+    error: '#FF3B30',
+    surface: '#F2F2F7',
+    cardBackground: '#FFFFFF',
+    border: '#E5E5EA'
   },
   typography: {
     h1: '2.5rem',
@@ -26,24 +26,29 @@ const lightTheme = {
     xs: '0.25rem',
     sm: '0.5rem',
     md: '1rem',
-    lg: '2rem',
-    xl: '4rem'
+    lg: '1.5rem',
+    xl: '2rem'
+  },
+  breakpoints: {
+    mobile: '320px',
+    tablet: '768px',
+    desktop: '1024px'
   }
 };
 
-const darkTheme = {
+export const darkTheme = {
   colors: {
     background: '#000000',
-    text: '#ffffff',
-    textSecondary: '#a0a0a0',
+    text: '#FFFFFF',
+    textSecondary: '#AEAEB2',
     primary: '#0A84FF',
-    primaryDark: '#0056b3',
+    primaryDark: '#0056B3',
     secondary: '#5E5CE6',
     accent: '#FF375F',
-    error: '#cf6679',
-    surface: '#1c1c1e',
-    cardBackground: '#1c1c1e',
-    border: '#2c2c2e'
+    error: '#FF453A',
+    surface: '#1C1C1E',
+    cardBackground: '#2C2C2E',
+    border: '#38383A'
   },
   typography: {
     h1: '2.5rem',
@@ -56,8 +61,13 @@ const darkTheme = {
     xs: '0.25rem',
     sm: '0.5rem',
     md: '1rem',
-    lg: '2rem',
-    xl: '4rem'
+    lg: '1.5rem',
+    xl: '2rem'
+  },
+  breakpoints: {
+    mobile: '320px',
+    tablet: '768px',
+    desktop: '1024px'
   }
 };
 

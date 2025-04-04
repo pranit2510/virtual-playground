@@ -13,7 +13,7 @@ const Nav = styled.nav`
   display: flex;
   justify-content: space-between;
   align-items: center;
-  background-color: ${({ theme }) => theme.background};
+  background-color: ${({ theme }) => theme.colors.background};
   z-index: 1000;
 `;
 
@@ -65,30 +65,29 @@ const MenuItem = styled(Link)`
   color: ${({ theme }) => theme.colors.text};
   text-decoration: none;
   font-size: ${({ theme }) => theme.typography.body};
-  transition: color 0.2s ease-in-out;
+  margin: 0 ${({ theme }) => theme.spacing.md};
+  
+  @media (max-width: ${({ theme }) => theme.breakpoints.tablet}) {
+    margin: ${({ theme }) => theme.spacing.sm} 0;
+  }
 
   &:hover {
     color: ${({ theme }) => theme.colors.primary};
   }
 `;
 
-const MobileMenu = styled(motion.div)`
+const MobileMenu = styled.div`
   display: none;
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background-color: ${({ theme }) => theme.background};
-  padding: ${({ theme }) => theme.spacing.xl};
-  z-index: 5;
-
-  @media (max-width: ${({ theme }) => theme.breakpoints.md}) {
+  
+  @media (max-width: ${({ theme }) => theme.breakpoints.tablet}) {
     display: flex;
     flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    gap: ${({ theme }) => theme.spacing.lg};
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    background-color: ${({ theme }) => theme.colors.background};
+    padding: ${({ theme }) => theme.spacing.md};
   }
 `;
 
@@ -127,12 +126,7 @@ export const Navigation: React.FC = () => {
         </ThemeToggle>
       </MenuLinks>
       {isOpen && (
-        <MobileMenu
-          initial={{ opacity: 0, y: -20 }}
-          animate={{ opacity: 1, y: 0 }}
-          exit={{ opacity: 0, y: -20 }}
-          transition={{ duration: 0.2 }}
-        >
+        <MobileMenu>
           <MenuItem to="/experiments" onClick={() => setIsOpen(false)}>
             Experiments
           </MenuItem>

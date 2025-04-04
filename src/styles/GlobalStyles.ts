@@ -17,7 +17,7 @@ export const GlobalStyles = createGlobalStyle`
       sans-serif;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
-    background-color: ${({ theme }) => theme.background};
+    background-color: ${({ theme }) => theme.colors.background};
     color: ${({ theme }) => theme.colors.text};
     transition: background-color 0.2s ease, color 0.2s ease;
   }
