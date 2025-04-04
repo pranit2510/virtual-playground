@@ -12,12 +12,17 @@ declare module "styled-components" {
       xl: string;
     };
     colors: {
-      primary: string;
-      secondary: string;
-      text: string;
       background: string;
+      text: string;
+      textSecondary: string;
+      primary: string;
+      primaryDark: string;
+      secondary: string;
       accent: string;
       error: string;
+      surface: string;
+      cardBackground: string;
+      border: string;
     };
     breakpoints: {
       sm: string;

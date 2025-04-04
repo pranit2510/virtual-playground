@@ -3,21 +3,22 @@ import { ThemeProvider as StyledThemeProvider } from 'styled-components';
 
 const lightTheme = {
   background: '#ffffff',
-  text: '#333333',
+  text: '#000000',
+  textSecondary: '#666666',
+  primary: '#007AFF',
+  primaryDark: '#0056b3',
+  secondary: '#5856D6',
+  accent: '#FF2D55',
+  error: '#b00020',
+  surface: '#f5f5f5',
+  cardBackground: '#ffffff',
+  border: '#e0e0e0',
   spacing: {
     xs: '0.25rem',
     sm: '0.5rem',
     md: '1rem',
     lg: '2rem',
     xl: '4rem',
-  },
-  colors: {
-    primary: '#6200ee',
-    secondary: '#03dac6',
-    text: '#333333',
-    background: '#ffffff',
-    accent: '#ff4081',
-    error: '#b00020',
   },
   breakpoints: {
     sm: '640px',
@@ -35,22 +36,23 @@ const lightTheme = {
 };
 
 const darkTheme = {
-  background: '#121212',
+  background: '#000000',
   text: '#ffffff',
+  textSecondary: '#a0a0a0',
+  primary: '#0A84FF',
+  primaryDark: '#0056b3',
+  secondary: '#5E5CE6',
+  accent: '#FF375F',
+  error: '#cf6679',
+  surface: '#1c1c1e',
+  cardBackground: '#1c1c1e',
+  border: '#2c2c2e',
   spacing: {
     xs: '0.25rem',
     sm: '0.5rem',
     md: '1rem',
     lg: '2rem',
     xl: '4rem',
-  },
-  colors: {
-    primary: '#bb86fc',
-    secondary: '#03dac6',
-    text: '#ffffff',
-    background: '#121212',
-    accent: '#cf6679',
-    error: '#cf6679',
   },
   breakpoints: {
     sm: '640px',
