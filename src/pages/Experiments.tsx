@@ -1,7 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
 import { motion } from 'framer-motion';
-import { HeroScene } from '../components/3d/HeroScene';
 
 const Container = styled.div`
   min-height: 100vh;
@@ -23,82 +22,136 @@ const Title = styled.h1`
   text-align: center;
 `;
 
-const Description = styled.p`
-  font-size: ${({ theme }) => theme.typography.body};
-  margin-bottom: ${({ theme }) => theme.spacing.xl};
-  text-align: center;
-`;
-
-const ExperimentGrid = styled.div`
+const Grid = styled.div`
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
   gap: ${({ theme }) => theme.spacing.lg};
-  margin-top: ${({ theme }) => theme.spacing.xl};
+  padding: ${({ theme }) => theme.spacing.lg} 0;
 `;
 
-const ExperimentCard = styled(motion.div)`
+const Card = styled(motion.div)`
   background-color: ${({ theme }) => `${theme.colors.primary}11`};
+  border-radius: 12px;
   padding: ${({ theme }) => theme.spacing.lg};
-  border-radius: 8px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
   cursor: pointer;
-  transition: background-color 0.2s ease-in-out;
+  transition: transform 0.2s ease;
 
   &:hover {
-    background-color: ${({ theme }) => `${theme.colors.primary}22`};
+    transform: translateY(-4px);
   }
 `;
 
-const ExperimentTitle = styled.h3`
+const ExperimentTitle = styled.h2`
   font-size: ${({ theme }) => theme.typography.h3};
   color: ${({ theme }) => theme.colors.primary};
-  margin-bottom: ${({ theme }) => theme.spacing.sm};
+  margin-bottom: ${({ theme }) => theme.spacing.md};
 `;
 
-const ExperimentDescription = styled.p`
+const Description = styled.p`
+  font-size: ${({ theme }) => theme.typography.body};
+  line-height: 1.6;
+  margin-bottom: ${({ theme }) => theme.spacing.md};
+`;
+
+const Tag = styled.span`
+  display: inline-block;
+  padding: ${({ theme }) => `${theme.spacing.xs} ${theme.spacing.sm}`};
+  margin-right: ${({ theme }) => theme.spacing.xs};
+  margin-bottom: ${({ theme }) => theme.spacing.xs};
+  background-color: ${({ theme }) => theme.colors.accent};
+  color: ${({ theme }) => theme.colors.text};
+  border-radius: 4px;
+  font-size: 0.875rem;
+`;
+
+const Input = styled.input`
+  width: 100%;
+  padding: ${({ theme }) => theme.spacing.md};
+  background-color: ${({ theme }) => `${theme.colors.primary}11`};
+  border: 1px solid ${({ theme }) => theme.colors.primary};
+  border-radius: 8px;
   font-size: ${({ theme }) => theme.typography.body};
   color: ${({ theme }) => theme.text};
+  margin-bottom: ${({ theme }) => theme.spacing.lg};
+
+  &:focus {
+    outline: none;
+    border-color: ${({ theme }) => theme.colors.accent};
+  }
+
+  &::placeholder {
+    color: ${({ theme }) => `${theme.text}88`};
+  }
 `;
 
+const experiments = [
+  {
+    id: 1,
+    title: '3D Particle System',
+    description: 'Interactive particle system with Three.js and React Three Fiber.',
+    tags: ['Three.js', 'React Three Fiber', '3D Graphics'],
+  },
+  {
+    id: 2,
+    title: 'Audio Visualizer',
+    description: 'Real-time audio visualization using Web Audio API and Canvas.',
+    tags: ['Web Audio API', 'Canvas', 'Animation'],
+  },
+  {
+    id: 3,
+    title: 'Physics Simulation',
+    description: 'Interactive physics simulation with Matter.js.',
+    tags: ['Matter.js', 'Physics', 'Animation'],
+  },
+  {
+    id: 4,
+    title: 'Shader Experiments',
+    description: 'Collection of GLSL shader experiments with WebGL.',
+    tags: ['WebGL', 'GLSL', 'Shaders'],
+  },
+];
+
 const Experiments: React.FC = () => {
-  const experiments = [
-    {
-      id: 1,
-      title: '3D Scene',
-      description: 'Interactive 3D scene built with React Three Fiber and Framer Motion.',
-      component: <HeroScene />
-    },
-    {
-      id: 2,
-      title: 'Coming Soon',
-      description: 'More experiments are on the way. Stay tuned!',
-      component: null
-    }
-  ];
+  const [searchTerm, setSearchTerm] = React.useState('');
+
+  const filteredExperiments = experiments.filter(
+    (experiment) =>
+      experiment.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
+      experiment.description.toLowerCase().includes(searchTerm.toLowerCase()) ||
+      experiment.tags.some((tag) =>
+        tag.toLowerCase().includes(searchTerm.toLowerCase())
+      )
+  );
 
   return (
     <Container>
       <Content>
         <Title>Experiments</Title>
-        <Description>
-          Explore our collection of interactive experiments and creative coding projects.
-        </Description>
-        <ExperimentGrid>
-          {experiments.map((experiment) => (
-            <ExperimentCard
+        <Input
+          type="text"
+          placeholder="Search experiments..."
+          value={searchTerm}
+          onChange={(e) => setSearchTerm(e.target.value)}
+        />
+        <Grid>
+          {filteredExperiments.map((experiment) => (
+            <Card
               key={experiment.id}
-              whileHover={{ scale: 1.02 }}
-              whileTap={{ scale: 0.98 }}
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5 }}
             >
               <ExperimentTitle>{experiment.title}</ExperimentTitle>
-              <ExperimentDescription>{experiment.description}</ExperimentDescription>
-              {experiment.component && (
-                <div style={{ height: '200px', marginTop: '1rem' }}>
-                  {experiment.component}
-                </div>
-              )}
-            </ExperimentCard>
+              <Description>{experiment.description}</Description>
+              <div>
+                {experiment.tags.map((tag) => (
+                  <Tag key={tag}>{tag}</Tag>
+                ))}
+              </div>
+            </Card>
           ))}
-        </ExperimentGrid>
+        </Grid>
       </Content>
     </Container>
   );
