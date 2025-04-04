@@ -63,68 +63,77 @@ const ContactLink = styled.a`
   }
 `;
 
-const ContactForm = styled(motion.form)`
-  display: flex;
-  flex-direction: column;
-  gap: ${({ theme }) => theme.spacing.md};
+const FormContainer = styled(motion.div)`
+  background-color: ${({ theme }) => `${theme.colors.primary}11`};
+  border-radius: 12px;
+  padding: ${({ theme }) => theme.spacing.xl};
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 `;
 
 const FormGroup = styled.div`
-  display: flex;
-  flex-direction: column;
-  gap: ${({ theme }) => theme.spacing.xs};
+  margin-bottom: ${({ theme }) => theme.spacing.lg};
 `;
 
 const Label = styled.label`
+  display: block;
   font-size: ${({ theme }) => theme.typography.body};
-  color: ${({ theme }) => theme.colors.text};
+  color: ${({ theme }) => theme.text};
+  margin-bottom: ${({ theme }) => theme.spacing.xs};
 `;
 
 const Input = styled.input`
+  width: 100%;
   padding: ${({ theme }) => theme.spacing.md};
-  background-color: ${({ theme }) => theme.colors.surface};
-  border: 1px solid ${({ theme }) => theme.colors.border};
+  background-color: ${({ theme }) => `${theme.colors.primary}11`};
+  border: 1px solid ${({ theme }) => theme.colors.primary};
   border-radius: 8px;
   font-size: ${({ theme }) => theme.typography.body};
-  color: ${({ theme }) => theme.colors.text};
-  transition: border-color ${({ theme }) => theme.transitions.fast};
+  color: ${({ theme }) => theme.text};
 
   &:focus {
     outline: none;
-    border-color: ${({ theme }) => theme.colors.primary};
+    border-color: ${({ theme }) => theme.colors.accent};
+  }
+
+  &::placeholder {
+    color: ${({ theme }) => `${theme.text}88`};
   }
 `;
 
 const TextArea = styled.textarea`
+  width: 100%;
   padding: ${({ theme }) => theme.spacing.md};
-  background-color: ${({ theme }) => theme.colors.surface};
-  border: 1px solid ${({ theme }) => theme.colors.border};
+  background-color: ${({ theme }) => `${theme.colors.primary}11`};
+  border: 1px solid ${({ theme }) => theme.colors.primary};
   border-radius: 8px;
   font-size: ${({ theme }) => theme.typography.body};
-  color: ${({ theme }) => theme.colors.text};
+  color: ${({ theme }) => theme.text};
   min-height: 150px;
   resize: vertical;
-  transition: border-color ${({ theme }) => theme.transitions.fast};
 
   &:focus {
     outline: none;
-    border-color: ${({ theme }) => theme.colors.primary};
+    border-color: ${({ theme }) => theme.colors.accent};
+  }
+
+  &::placeholder {
+    color: ${({ theme }) => `${theme.text}88`};
   }
 `;
 
-const SubmitButton = styled(motion.button)`
-  padding: ${({ theme }) => theme.spacing.md} ${({ theme }) => theme.spacing.lg};
+const Button = styled(motion.button)`
   background-color: ${({ theme }) => theme.colors.primary};
-  color: ${({ theme }) => theme.colors.background};
+  color: #ffffff;
   border: none;
   border-radius: 8px;
+  padding: ${({ theme }) => `${theme.spacing.md} ${theme.spacing.lg}`};
   font-size: ${({ theme }) => theme.typography.body};
-  font-weight: bold;
   cursor: pointer;
-  transition: background-color ${({ theme }) => theme.transitions.fast};
+  width: 100%;
+  transition: background-color 0.2s ease;
 
   &:hover {
-    background-color: ${({ theme }) => theme.colors.secondary};
+    background-color: ${({ theme }) => theme.colors.accent};
   }
 
   &:disabled {
@@ -215,6 +224,59 @@ const Contact: React.FC = () => {
             </Text>
           </Section>
         </ContactInfo>
+        <FormContainer
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5 }}
+        >
+          <form onSubmit={handleSubmit}>
+            <FormGroup>
+              <Label htmlFor="name">Name</Label>
+              <Input
+                type="text"
+                id="name"
+                name="name"
+                value={values.name}
+                onChange={handleChange}
+                onBlur={handleBlur}
+                placeholder="Enter your name"
+                required
+              />
+            </FormGroup>
+            <FormGroup>
+              <Label htmlFor="email">Email</Label>
+              <Input
+                type="email"
+                id="email"
+                name="email"
+                value={values.email}
+                onChange={handleChange}
+                onBlur={handleBlur}
+                placeholder="Enter your email"
+                required
+              />
+            </FormGroup>
+            <FormGroup>
+              <Label htmlFor="message">Message</Label>
+              <TextArea
+                id="message"
+                name="message"
+                value={values.message}
+                onChange={handleChange}
+                onBlur={handleBlur}
+                placeholder="Enter your message"
+                required
+              />
+            </FormGroup>
+            <Button
+              type="submit"
+              whileHover={{ scale: 1.02 }}
+              whileTap={{ scale: 0.98 }}
+            >
+              Send Message
+            </Button>
+          </form>
+        </FormContainer>
       </Content>
     </Container>
   );
