@@ -57,6 +57,20 @@ const Button = styled(motion.button)`
   }
 `;
 
+const HeroSection = styled.section`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 80vh;
+  padding: ${({ theme }) => theme.spacing.xl};
+  text-align: center;
+
+  @media (max-width: ${({ theme }) => theme.breakpoints.tablet}) {
+    padding: ${({ theme }) => theme.spacing.lg};
+  }
+`;
+
 const Home: React.FC = () => {
   return (
     <Container>

@@ -151,6 +151,20 @@ const SuccessMessage = styled.p`
   color: ${({ theme }) => theme.colors.text};
 `;
 
+const ContactForm = styled.form`
+  display: flex;
+  flex-direction: column;
+  gap: ${({ theme }) => theme.spacing.md};
+  max-width: 600px;
+  width: 100%;
+  margin: 0 auto;
+  padding: ${({ theme }) => theme.spacing.lg};
+
+  @media (max-width: ${({ theme }) => theme.breakpoints.tablet}) {
+    padding: ${({ theme }) => theme.spacing.md};
+  }
+`;
+
 const Contact: React.FC = () => {
   const { values, errors, touched, isSubmitting, handleChange, handleBlur, handleSubmit } = useForm<FormValues>({
     initialValues: {
@@ -233,7 +247,7 @@ const Contact: React.FC = () => {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5 }}
         >
-          <form onSubmit={handleSubmit}>
+          <ContactForm onSubmit={handleSubmit}>
             <FormGroup>
               <FormLabel htmlFor="name">Name</FormLabel>
               <FormInput
@@ -279,7 +293,7 @@ const Contact: React.FC = () => {
             >
               Send Message
             </SubmitButton>
-          </form>
+          </ContactForm>
         </FormContainer>
       </Content>
     </Container>

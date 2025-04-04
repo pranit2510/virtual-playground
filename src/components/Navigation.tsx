@@ -36,7 +36,7 @@ const MenuButton = styled.button`
   padding: 0;
   z-index: 10;
 
-  @media (max-width: ${({ theme }) => theme.breakpoints.md}) {
+  @media (max-width: ${({ theme }) => theme.breakpoints.tablet}) {
     display: flex;
   }
 
