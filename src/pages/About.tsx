@@ -1,109 +1,107 @@
 import React from 'react';
 import styled from 'styled-components';
 import { motion } from 'framer-motion';
-import { useInView } from 'react-intersection-observer';
 
-const AboutContainer = styled.div`
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 2rem;
-`;
-
-const Section = styled(motion.section)`
-  margin-bottom: 4rem;
-`;
-
-const Title = styled.h1`
-  font-size: 3rem;
-  margin-bottom: 2rem;
-  color: ${({ theme }) => theme.colors.primary};
+const Container = styled.div`
+  min-height: 100vh;
+  padding: ${({ theme }) => theme.spacing.xl};
+  padding-top: calc(${({ theme }) => theme.spacing.xl} * 3);
+  background-color: ${({ theme }) => theme.background};
+  color: ${({ theme }) => theme.text};
 `;
 
 const Content = styled.div`
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-  gap: 2rem;
+  max-width: 800px;
+  margin: 0 auto;
+`;
+
+const Title = styled.h1`
+  font-size: ${({ theme }) => theme.typography.h1};
+  color: ${({ theme }) => theme.colors.primary};
+  margin-bottom: ${({ theme }) => theme.spacing.lg};
+  text-align: center;
 `;
 
 const Card = styled(motion.div)`
-  background: ${({ theme }) => theme.colors.cardBackground};
-  padding: 2rem;
+  background-color: ${({ theme }) => `${theme.colors.primary}11`};
+  padding: ${({ theme }) => theme.spacing.lg};
   border-radius: 8px;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  margin-bottom: ${({ theme }) => theme.spacing.lg};
 `;
 
-const CardTitle = styled.h3`
-  font-size: 1.5rem;
-  margin-bottom: 1rem;
-  color: ${({ theme }) => theme.colors.text};
+const Section = styled.div`
+  margin-bottom: ${({ theme }) => theme.spacing.xl};
 `;
 
-const CardText = styled.p`
-  font-size: 1.1rem;
-  color: ${({ theme }) => theme.colors.textSecondary};
+const SectionTitle = styled.h2`
+  font-size: ${({ theme }) => theme.typography.h2};
+  color: ${({ theme }) => theme.colors.primary};
+  margin-bottom: ${({ theme }) => theme.spacing.md};
+`;
+
+const Text = styled.p`
+  font-size: ${({ theme }) => theme.typography.body};
   line-height: 1.6;
+  margin-bottom: ${({ theme }) => theme.spacing.md};
 `;
 
-const fadeInUp = {
-  hidden: { opacity: 0, y: 20 },
-  visible: { opacity: 1, y: 0 },
-};
+const List = styled.ul`
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+`;
 
-const staggerContainer = {
-  hidden: { opacity: 0 },
-  visible: {
-    opacity: 1,
-    transition: {
-      staggerChildren: 0.2,
-    },
-  },
-};
+const ListItem = styled.li`
+  font-size: ${({ theme }) => theme.typography.body};
+  margin-bottom: ${({ theme }) => theme.spacing.sm};
+  display: flex;
+  align-items: center;
+
+  &:before {
+    content: '•';
+    color: ${({ theme }) => theme.colors.primary};
+    margin-right: ${({ theme }) => theme.spacing.sm};
+  }
+`;
 
 const About: React.FC = () => {
-  const [ref, inView] = useInView({
-    triggerOnce: true,
-    threshold: 0.1,
-  });
-
   return (
-    <AboutContainer>
-      <Section
-        initial="hidden"
-        animate={inView ? "visible" : "hidden"}
-        variants={staggerContainer}
-        ref={ref}
-      >
+    <Container>
+      <Content>
         <Title>About Virtual Playground</Title>
-        <Content>
-          <Card variants={fadeInUp}>
-            <CardTitle>Our Vision</CardTitle>
-            <CardText>
-              Virtual Playground is a space where creativity meets technology.
-              We believe in pushing the boundaries of what's possible in the digital realm,
-              creating immersive experiences that inspire and engage.
-            </CardText>
-          </Card>
-
-          <Card variants={fadeInUp}>
-            <CardTitle>Technology</CardTitle>
-            <CardText>
-              Built with cutting-edge technologies including React, Three.js, and WebGL,
-              our platform showcases the potential of modern web development.
-              We're constantly exploring new ways to enhance user experience through innovation.
-            </CardText>
-          </Card>
-
-          <Card variants={fadeInUp}>
-            <CardTitle>Experience</CardTitle>
-            <CardText>
-              Step into our virtual playground and discover a world of interactive
-              3D environments, dynamic animations, and engaging user interfaces.
-              Every element is crafted to provide a unique and memorable experience.
-            </CardText>
-          </Card>
-        </Content>
-      </Section>
-    </AboutContainer>
+        <Card
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5 }}
+        >
+          <Section>
+            <SectionTitle>Our Mission</SectionTitle>
+            <Text>
+              Virtual Playground is a creative space where technology meets imagination.
+              We explore the possibilities of modern web technologies through interactive
+              experiments and immersive experiences.
+            </Text>
+          </Section>
+          <Section>
+            <SectionTitle>Technologies</SectionTitle>
+            <List>
+              <ListItem>React and TypeScript for robust frontend development</ListItem>
+              <ListItem>Three.js and React Three Fiber for 3D graphics</ListItem>
+              <ListItem>Framer Motion for smooth animations</ListItem>
+              <ListItem>Styled Components for dynamic styling</ListItem>
+            </List>
+          </Section>
+          <Section>
+            <SectionTitle>Get Involved</SectionTitle>
+            <Text>
+              We're always looking for creative minds to collaborate with. Whether you're
+              a developer, designer, or just someone passionate about interactive experiences,
+              feel free to reach out through our contact page.
+            </Text>
+          </Section>
+        </Card>
+      </Content>
+    </Container>
   );
 };
 
