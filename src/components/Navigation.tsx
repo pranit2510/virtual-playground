@@ -55,9 +55,10 @@ const MenuLinks = styled.div`
   display: flex;
   align-items: center;
   gap: ${({ theme }) => theme.spacing.md};
+  z-index: 10;
 
-  @media (max-width: ${({ theme }) => theme.breakpoints.md}) {
-    display: none;
+  @media (max-width: ${({ theme }) => theme.breakpoints.tablet}) {
+    display: flex;
   }
 `;
 
